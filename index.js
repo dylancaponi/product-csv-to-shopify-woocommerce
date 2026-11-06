@@ -11,6 +11,7 @@ import * as shopifySrc from './src/sources/shopify.js';
 import * as wooSrc from './src/sources/woocommerce.js';
 import * as squarespace from './src/sources/squarespace.js';
 import * as wix from './src/sources/wix.js';
+import * as bigcommerce from './src/sources/bigcommerce.js';
 import * as shopifyOut from './src/targets/shopify.js';
 import * as wooOut from './src/targets/woocommerce.js';
 import { validateShopify } from './src/validate-shopify.js';
@@ -25,6 +26,7 @@ export const SOURCES = {
   squarespace: { label: 'Squarespace product export', detect: squarespace.detect, parse: squarespace.parse },
   wix: { label: 'Wix Stores export (classic catalog)', detect: wix.detect, parse: wix.parse },
   'wix-v3': { label: 'Wix Stores export (new catalog)', detect: wix.detectV3, parse: wix.parseV3 },
+  bigcommerce: { label: 'BigCommerce product export', detect: bigcommerce.detect, parse: bigcommerce.parse },
 };
 
 export const TARGETS = {
@@ -86,12 +88,14 @@ export function detectSource(text) {
   try { headers = parseCSV(text.slice(0, 200000), { maxRows: 1 })[0].map((h) => h.trim()); } catch (e) {
     return { sourceId: null, confidence: 0, reason: e instanceof EngineError ? e.message : 'The file could not be read as CSV.', candidates: [] };
   }
+  // BigCommerce's legacy "Bulk Edit" layout is recognised only to refuse it.
+  if (bigcommerce.isLegacy(headers)) return { sourceId: null, confidence: 0, reason: bigcommerce.LEGACY_MESSAGE, candidates: [] };
   const candidates = Object.entries(SOURCES)
     .map(([id, s]) => ({ id, ...s.detect(headers) }))
     .sort((a, b) => b.score - a.score);
   const best = candidates[0];
   if (!best || best.score < 0.5) {
-    return { sourceId: null, confidence: best ? best.score : 0, reason: 'We could not recognise this file. Upload the product export exactly as your store platform produced it (Etsy, Shopify, WooCommerce, Wix or Squarespace).', candidates: candidates.map(({ id, score }) => ({ id, score })) };
+    return { sourceId: null, confidence: best ? best.score : 0, reason: 'We could not recognise this file. Upload the product export exactly as your store platform produced it (Etsy, Shopify, WooCommerce, Wix, Squarespace or BigCommerce).', candidates: candidates.map(({ id, score }) => ({ id, score })) };
   }
   return { sourceId: best.id, confidence: best.score, reason: best.reason, candidates: candidates.map(({ id, score }) => ({ id, score })) };
 }
@@ -100,6 +104,7 @@ export function detectSource(text) {
 export function parseProducts(text, options = {}) {
   const { headers, records, duplicates } = headerRows(text);
   let sourceId = options.source;
+  if (bigcommerce.isLegacy(headers.map((h) => h.trim()))) fail('UNSUPPORTED_LAYOUT', bigcommerce.LEGACY_MESSAGE);
   if (!sourceId) {
     const d = detectSource(text);
     if (!d.sourceId) fail('UNKNOWN_SOURCE', d.reason);

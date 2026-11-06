@@ -10,7 +10,7 @@ const gold = (n) => readFileSync(new URL(`../golden/${n}`, import.meta.url), 'ut
 const codes = (issues) => issues.map((i) => i.code);
 const rowsOf = (csv) => { const rows = parseCSV(csv); const h = rows[0]; return rows.slice(1).map((r) => Object.fromEntries(h.map((k, i) => [k, r[i]]))); };
 
-const EXPECT_SOURCE = { 'etsy-listings': 'etsy', 'shopify-export': 'shopify', 'shopify-legacy': 'shopify', 'woocommerce-export': 'woocommerce', 'squarespace-export': 'squarespace', 'wix-classic': 'wix', 'wix-v3': 'wix-v3' };
+const EXPECT_SOURCE = { 'etsy-listings': 'etsy', 'shopify-export': 'shopify', 'shopify-legacy': 'shopify', 'woocommerce-export': 'woocommerce', 'squarespace-export': 'squarespace', 'wix-classic': 'wix', 'wix-v3': 'wix-v3', 'bigcommerce-export': 'bigcommerce' };
 
 for (const f of FIXTURES) {
   test(`detect: ${f} -> ${EXPECT_SOURCE[f]}`, () => {
