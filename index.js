@@ -14,8 +14,9 @@ import * as wix from './src/sources/wix.js';
 import * as shopifyOut from './src/targets/shopify.js';
 import * as wooOut from './src/targets/woocommerce.js';
 import { validateShopify } from './src/validate-shopify.js';
+import { validateWooCommerce } from './src/validate-woocommerce.js';
 
-export { EngineError, parseCSV, writeCSV, RULES, validateShopify };
+export { EngineError, parseCSV, writeCSV, RULES, validateShopify, validateWooCommerce };
 
 export const SOURCES = {
   etsy: { label: 'Etsy (EtsyListingsDownload.csv)', detect: etsy.detect, parse: etsy.parse },
@@ -59,9 +60,11 @@ function sniffNonCsv(text) {
   if (typeof text !== 'string') return 'The file could not be read as text. Upload the .csv file exactly as it was downloaded.';
   if (!text.trim()) return 'This file is empty.';
   const head = text.slice(0, 512);
-  if (head.startsWith('PK')) return 'This looks like an Excel (.xlsx) or zip file. Open it in Excel or Google Sheets, save or download it as CSV, then upload the CSV.';
+  // Zip local file header signature (xlsx, ods, numbers are zips); a CSV
+  // header such as "PKG" must not match.
+  if (head.startsWith('PK\u0003\u0004') || head.startsWith('PK\u0005\u0006')) return 'This looks like an Excel (.xlsx) or zip file. Open it in Excel or Google Sheets, save or download it as CSV, then upload the CSV.';
   if (head.startsWith('%PDF')) return 'This is a PDF, not a CSV export.';
-  if (/^\s*<(!doctype|html)/i.test(head)) return 'This is a web page, not a CSV export.';
+  if (/^\s*<!doctype html[\s>]/i.test(head) || (/^\s*<html[\s>]/i.test(head) && /<(head|body)[\s>]|<\/html>/i.test(text.slice(0, 4096)))) return 'This is a web page, not a CSV export.';
   if (head.includes('\u0000')) return 'This file is not plain text (it may be UTF-16 or a spreadsheet). Save it as "CSV UTF-8" and try again.';
   if (text.length > MAX_BYTES) return 'This file is larger than 100 MB. Export fewer products at a time.';
   return null;
@@ -233,9 +236,11 @@ function splitShopify(csv) {
   return parts.map((p, k) => ({ filename: `shopify-products-part-${k + 1}.csv`, csv: writeCSV([header, ...p], { eol: '\n' }) }));
 }
 
-// validate(text, { target: 'shopify' }) -> { ok, issues, summary, stats }
+// validate(text, { target: 'shopify' | 'woocommerce', fileName?, byteLength? })
+//   -> { ok, issues, summary, stats }
 export function validate(text, options = {}) {
   const target = options.target || 'shopify';
-  if (target !== 'shopify') fail('UNKNOWN_TARGET', 'Only Shopify product CSV validation is available so far.');
+  if (target === 'woocommerce') return validateWooCommerce(text, { ...options, sniff: (t) => { const m = sniffNonCsv(t); return m && m !== 'This file is empty.' ? m : null; } });
+  if (target !== 'shopify') fail('UNKNOWN_TARGET', 'Product CSV checking is available for shopify and woocommerce.');
   return validateShopify(text, options);
 }
