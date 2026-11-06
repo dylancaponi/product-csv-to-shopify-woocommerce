@@ -1,6 +1,6 @@
 # product-csv-to-shopify-woocommerce
 
-Convert product CSV exports from Etsy, Wix, Squarespace, WooCommerce, Shopify and BigCommerce into a file the Shopify or WooCommerce product importer accepts, and check a product CSV for the rows and columns the importer would reject before you upload it.
+Convert product CSV exports from Etsy, Wix, Squarespace, WooCommerce, Shopify, BigCommerce, Square and Magento 2 into a file the Shopify or WooCommerce product importer accepts, and check a product CSV for the rows and columns the importer would reject before you upload it.
 
 Plain ES modules, zero dependencies, no network calls. The same code runs in the browser, a Web Worker and Node 20+.
 
@@ -69,7 +69,7 @@ Meaning: `error` = the importer would reject this row or product (in `convert` t
 
 ## Supported pairs
 
-Every source below converts to both Shopify and WooCommerce, and every pair is covered by a golden-file test. 8 fixtures x 2 destinations = 16 pairs.
+Every source below converts to both Shopify and WooCommerce, and every pair is covered by a golden-file test. 10 fixtures x 2 destinations = 20 pairs.
 
 | Source (`sourceId`) | Known limitations |
 |---|---|
@@ -79,6 +79,8 @@ Every source below converts to both Shopify and WooCommerce, and every pair is c
 | Squarespace product export, 32 or 34 columns (`squarespace`) | Weights have no unit in the file, so set `sourceWeightUnit`. Service products are converted without shipping. The export has no variant images or alt text. Up to 6 options are read; Shopify takes 3, so products with more are left out of Shopify files. |
 | Wix Stores, classic catalog, header `handleId` (`wix`) | Images are Wix media IDs. Links are built as `https://static.wixstatic.com/media/<id>` (Wix's usual host; Wix's help does not document it). Variant price = product price + surcharge, minus the product discount. Ribbons, additional info sections and custom text fields are dropped. Weight unit as for Squarespace. |
 | Wix Stores, new catalog, header `handle` (`wix-v3`) | Same image link caveat. Modifiers and ribbons are dropped. Category slugs become WooCommerce categories, not Shopify collections. |
+| Square item library export, CSV (`square`) | One row per variation; rows with the same Item Name next to each other form one product (a repeated variation name starts a new one, with a warning). The export has no images. Stock is the first location's Current Quantity; other locations' stock, location prices and disabled locations are counted in warnings. Variable prices have no price (left out of Shopify files). Online Sale Price is undocumented by Square: a lower one becomes the price with Price as compare-at, warned per variation. Visibility hidden / unavailable / archived / unclear become drafts. Modifier sets, taxes and units are not carried over (warned). Weight unit from the `Weight (lb)` / `Weight (kg)` header. Layout from Square help pages and real exports on GitHub, see research/square.md. |
+| Magento 2 / Adobe Commerce product export (`magento`) | Simple, virtual (no shipping) and configurable products; children linked by sku from configurable_variations wherever they sit. Store-view rows (store_view_code set) are skipped and counted; a sku only on store-view rows is warned. special_price lower than price becomes the sale, unless its date window excludes today (warned); a running sale with an end date is warned (no end date in the import file). Image paths are relative, so images are left out by name (full links kept). Bundle, grouped, downloadable and gift card products, custom options, links, extra attributes and short descriptions are named and counted. Weight unit as for BigCommerce. Magento 1 exports are refused by name. See research/magento.md. |
 | BigCommerce product export, modern Import/Export (v3) layout (`bigcommerce`) | The export has category and brand ID numbers only, so categories and brands cannot move. Variant rows carry no product reference, so a file re-sorted in a spreadsheet is detected and warned. A product-level sale price on variants is warned with both prices named. Modifiers are not in the CSV. The older Bulk Edit layout is refused by name. |
 
 Destination notes:
@@ -101,4 +103,4 @@ It is linked from BigCommerce's Modern Import/Export overview:
 
 https://support.bigcommerce.com/articles/en_US/Knowledge/Modern-Import-Export-Overview
 
-The golden files for that fixture are generated from it, so they contain those two products as well. All other fixtures are invented.
+The golden files for that fixture are generated from it, so they contain those two products as well. All other fixtures are invented. `fixtures/square-export.csv` copies only the column layout of real Square exports found on GitHub (listed in research/square.md); every row in it is invented, and no row from those files is in the repo. `fixtures/magento-export.csv` copies only the 82-column header of a real Magento 2 export (REAL-1 in research/magento.md); every row is invented.
