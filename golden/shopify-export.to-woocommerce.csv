@@ -1,0 +1,7 @@
+﻿ID,Type,SKU,Name,Published,Is featured?,Visibility in catalog,Short description,Description,Tax status,In stock?,Stock,Backorders allowed?,Weight (kg),Sale price,Regular price,Categories,Tags,Images,Parent,Position,Attribute 1 name,Attribute 1 value(s),Attribute 1 visible,Attribute 1 global,Attribute 2 name,Attribute 2 value(s),Attribute 2 visible,Attribute 2 global
+,variable,garment-dyed-tee,Garment Dyed Tee,1,0,visible,,"<p>Soft cotton tee, ""garment dyed"", pre-shrunk.</p>\n<ul><li>100% cotton</li><li>Unisex, regular fit</li></ul>",taxable,,,,,,,T-Shirt,"cotton, tee, unisex","https://cdn.example.com/tee-black.jpg, https://cdn.example.com/tee-white.jpg, https://cdn.example.com/tee-detail.jpg",,,Size,"S, M",1,0,Color,"Black, White",1,0
+,variation,GDT-S-BLK,"Garment Dyed Tee - S, Black",1,,,,,taxable,1,10,0,0.181,28.00,35.00,,,https://cdn.example.com/tee-black.jpg,garment-dyed-tee,1,Size,S,1,0,Color,Black,1,0
+,variation,GDT-S-WHT,"Garment Dyed Tee - S, White",1,,,,,taxable,1,0,1,0.181,28.00,35.00,,,https://cdn.example.com/tee-white.jpg,garment-dyed-tee,2,Size,S,1,0,Color,White,1,0
+,variation,GDT-M-BLK,"Garment Dyed Tee - M, Black",1,,,,,taxable,1,7,0,0.195,,28.00,,,,garment-dyed-tee,3,Size,M,1,0,Color,Black,1,0
+,variation,GDT-M-WHT,"Garment Dyed Tee - M, White",1,,,,,taxable,1,3,0,0.195,,28.00,,,,garment-dyed-tee,4,Size,M,1,0,Color,White,1,0
+,simple,WRAP,Gift Wrap,-1,0,hidden,,Recycled paper wrap,none,1,,0,0.05,,4.50,,,,,,,,,,,,,

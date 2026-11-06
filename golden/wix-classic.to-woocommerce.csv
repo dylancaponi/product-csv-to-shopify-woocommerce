@@ -1,0 +1,7 @@
+﻿ID,Type,SKU,Name,Published,Is featured?,Visibility in catalog,Short description,Description,Tax status,In stock?,Stock,Backorders allowed?,Weight (kg),Sale price,Regular price,Categories,Tags,Images,Parent,Position,Attribute 1 name,Attribute 1 value(s),Attribute 1 visible,Attribute 1 global,Attribute 2 name,Attribute 2 value(s),Attribute 2 visible,Attribute 2 global
+,variable,ribbed-beanie,Ribbed Beanie,1,0,visible,,"<p>Soft acrylic, one size.</p>",taxable,,,,,,,Hats,,"https://static.wixstatic.com/media/abc123_0001~mv2.jpg, https://static.wixstatic.com/media/abc123_0002~mv2.jpg",,,Color,"Black, White",1,0,Size,"Kids, Adult",1,0
+,variation,BEA-BLK-K,"Ribbed Beanie - Black, Kids",1,,,,,taxable,1,5,0,0.0907,18.00,20.00,,,,ribbed-beanie,1,Color,Black,1,0,Size,Kids,1,0
+,variation,BEA-BLK-A,"Ribbed Beanie - Black, Adult",1,,,,,taxable,1,8,0,0.1134,20.25,22.50,,,,ribbed-beanie,2,Color,Black,1,0,Size,Adult,1,0
+,variation,BEA-WHT-K,"Ribbed Beanie - White, Kids",1,,,,,taxable,0,0,0,0.0907,18.00,20.00,,,,ribbed-beanie,3,Color,White,1,0,Size,Kids,1,0
+,variation,BEA-WHT-A,"Ribbed Beanie - White, Adult",1,,,,,taxable,1,3,0,0.1134,20.25,22.50,,,,ribbed-beanie,4,Color,White,1,0,Size,Adult,1,0
+,simple,PIN-01,Enamel Pin,-1,0,visible,,"Hard enamel, gold plating.",taxable,1,40,0,0.0227,,12.00,Accessories,,https://static.wixstatic.com/media/abc123_0003~mv2.png,,,,,,,,,,

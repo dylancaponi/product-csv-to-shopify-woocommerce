@@ -1,0 +1,5 @@
+[
+ "warning WEIGHT_UNIT_ASSUMED",
+ "warning WIX_MEDIA_URLS",
+ "info WIX_FIELDS_DROPPED"
+]

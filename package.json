@@ -1,0 +1,36 @@
+{
+  "name": "product-csv-to-shopify-woocommerce",
+  "version": "0.1.0",
+  "description": "In-browser store migration: product CSV exports converted to Shopify and WooCommerce import files, plus a Shopify import validator.",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "MIT",
+  "homepage": "https://cataloghop.dylan-caponi.workers.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dylancaponi/product-csv-to-shopify-woocommerce.git"
+  },
+  "keywords": [
+    "shopify",
+    "woocommerce",
+    "etsy",
+    "wix",
+    "squarespace",
+    "product-csv",
+    "csv",
+    "import",
+    "migration",
+    "converter",
+    "validator",
+    "ecommerce"
+  ]
+}

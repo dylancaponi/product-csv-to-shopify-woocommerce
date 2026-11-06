@@ -1,0 +1,7 @@
+Title,URL handle,Description,Status,SKU,Option1 name,Option1 value,Price,Compare-at price,Inventory tracker,Inventory quantity,Continue selling when out of stock,Weight value (grams),Weight unit for display,Fulfillment service,Product image URL,Image position,tags
+Good Mug,good-mug,,active,M1,Title,Default Title,10.00,,shopify,3,deny,,,manual,https://cdn.example.com/mug.jpg,1,
+Bad Tee,bad tee,,live,M1,Size,S,"$1,299.00","12,50",shopify,,sometimes,2 lb,pounds,manual,images/tee.jpg,,
+,bad tee,,,,,S,,,shopify,ten,deny,,,,,,
+Good Mug,good-mug,,,,,Default Title,10.00,,,,,,,manual,,,
+,no-title,,,,,Default Title,5.00,,,,,,,manual,,,
+Status Blank,status-blank,,,,Title,Default Title,5.00,,,,,,,manual,http://cdn.example.com/x.jpg,,

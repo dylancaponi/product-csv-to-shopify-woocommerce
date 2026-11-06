@@ -1,0 +1,5 @@
+[
+ "warning WEIGHT_UNIT_ASSUMED",
+ "warning UNSUPPORTED_TYPE",
+ "error TOO_MANY_OPTIONS"
+]

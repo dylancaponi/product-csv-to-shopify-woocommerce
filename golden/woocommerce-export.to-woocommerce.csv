@@ -1,0 +1,7 @@
+﻿ID,Type,SKU,Name,Published,Is featured?,Visibility in catalog,Short description,Description,Tax status,In stock?,Stock,Backorders allowed?,Weight (kg),Sale price,Regular price,Categories,Tags,Images,Parent,Position,Attribute 1 name,Attribute 1 value(s),Attribute 1 visible,Attribute 1 global,Attribute 2 name,Attribute 2 value(s),Attribute 2 visible,Attribute 2 global
+,simple,CANDLE-01,"Soy Candle ""Fig & Cedar""",1,0,visible,,"<p>Burns 40 hours.</p>\n<p>Cotton wick, 8 oz.</p>",taxable,1,15,0,0.3402,,18.00,Home > Candles,"candle, soy\, natural","https://shop.example.com/wp-content/uploads/candle-1.jpg, https://shop.example.com/wp-content/uploads/candle-2.jpg",,,,,,,,,,
+,variable,HOODIE,Café Hoodie,1,0,visible,,Brushed fleece hoodie.,taxable,,,,,,,Clothing > Hoodies,hoodie,"https://shop.example.com/wp-content/uploads/hoodie.jpg, https://shop.example.com/wp-content/uploads/hoodie-red.jpg",,,Color,"Red, Blue",1,0,Size,"S, M",1,0
+,variation,HOODIE-RED-S,"Café Hoodie - Red, S",1,,,,,taxable,1,4,0,0.5443,45.00,55.00,,,https://shop.example.com/wp-content/uploads/hoodie-red.jpg,HOODIE,1,Color,Red,1,0,Size,S,1,0
+,variation,HOODIE-RED-M,"Café Hoodie - Red, M",1,,,,,taxable,1,0,1,0.5897,,55.00,,,,HOODIE,2,Color,Red,1,0,Size,M,1,0
+,variation,HOODIE-BLU-S,"Café Hoodie - Blue, S",1,,,,,taxable,1,9,0,0.5443,,55.00,,,,HOODIE,3,Color,Blue,1,0,Size,S,1,0
+,simple,,Candle Duplicate SKU,-1,0,visible,,,none,1,,0,,,1234.50,,,,,,,,,,,,,

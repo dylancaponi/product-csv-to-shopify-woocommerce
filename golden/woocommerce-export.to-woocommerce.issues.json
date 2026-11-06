@@ -1,0 +1,8 @@
+[
+ "info SHORT_DESCRIPTION_DROPPED",
+ "warning UNSUPPORTED_TYPE",
+ "warning PRICE_GUESSED",
+ "error VARIATION_ORPHAN",
+ "warning DUPLICATE_SKU_CLEARED",
+ "info VENDOR_DROPPED"
+]

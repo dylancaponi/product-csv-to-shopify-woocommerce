@@ -1,0 +1,4 @@
+﻿ID,Type,SKU,Name,Published,Is featured?,Visibility in catalog,Short description,Description,Tax status,In stock?,Stock,Backorders allowed?,Weight (kg),Sale price,Regular price,Categories,Tags,Images,Parent,Position,Attribute 1 name,Attribute 1 value(s),Attribute 1 visible,Attribute 1 global
+,variable,wool-beanie,Wool Beanie,1,0,visible,,<p>Merino wool.</p>,taxable,,,,,,,Hat,"wool, winter",https://cdn.example.com/beanie.jpg,,,Color,"Grey, Navy",1,0
+,variation,BEANIE-GRY,Wool Beanie - Grey,1,,,,,taxable,1,20,0,0.09,,22.00,,,,wool-beanie,1,Color,Grey,1,0
+,variation,BEANIE-NVY,Wool Beanie - Navy,1,,,,,taxable,0,0,0,0.09,,22.00,,,,wool-beanie,2,Color,Navy,1,0

@@ -1,0 +1,7 @@
+[
+ "warning WEIGHT_UNIT_ASSUMED",
+ "warning UNSUPPORTED_TYPE",
+ "info PARENT_SKU_ADDED",
+ "warning DUPLICATE_SKU_CLEARED",
+ "info PARENT_SKU_ADDED"
+]
