@@ -131,7 +131,7 @@ export function parse(headers, records, ctx) {
   const grams = (raw) => {
     const w = num(raw);
     if (w === null || w <= 0) return null;
-    if (!unit && !weightWarned) { issue('warning', 'WEIGHT_UNIT_ASSUMED', 'Magento exports weights without a unit (it uses the store setting, pounds by default). Weights were read as pounds; set the source weight unit if your store uses kilograms, grams or ounces.', {}); weightWarned = true; }
+    if (!unit && !weightWarned) { issue('warning', 'WEIGHT_UNIT_ASSUMED', 'Magento exports weights without a unit (it uses the store setting, pounds by default). With no unit chosen, weights are read as pounds. Choose your store\'s weight unit if it is kilograms, grams or ounces.', {}); weightWarned = true; }
     return toGrams(w, unit || 'lb');
   };
 
@@ -283,7 +283,7 @@ export function parse(headers, records, ctx) {
   const attrs = [...c.attrCodes];
   if (attrs.length) issue('info', 'MAGENTO_ATTRIBUTES_DROPPED', `Extra attributes in additional_attributes were not carried over: ${attrs.slice(0, 8).join(', ')}${attrs.length > 8 ? ` and ${attrs.length - 8} more` : ''}.`, {});
   const dropped = [c.shortDesc ? `short descriptions (${c.shortDesc})` : '', c.metaKeywords ? `meta keywords (${c.metaKeywords})` : ''].filter(Boolean);
-  if (dropped.length) issue('info', 'MAGENTO_FIELDS_DROPPED', `Not carried over: ${dropped.join(', ')}.`, {});
+  if (dropped.length) issue('info', 'MAGENTO_FIELDS_DROPPED', `These Magento fields have no equivalent in the destination file and were not carried over: ${dropped.join(', ')}.`, {});
   issue('info', 'MAGENTO_NOT_IN_EXPORT', 'Tier prices are in a separate Magento export, not in the Products export, and stock per source (multi-source inventory) is not in this file, so neither moved.', {});
   return products;
 }
